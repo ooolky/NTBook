@@ -1,4 +1,4 @@
-# Nagetive
+# NTBook
 类知乎的书评网站。
 
 已实现功能：
