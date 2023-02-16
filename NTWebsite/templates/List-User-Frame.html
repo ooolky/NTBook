@@ -1,0 +1,111 @@
+{% load CustomFuncTags %}
+<div class="TopstoryMain DivUserList">
+    <div class="CardList">
+        {% for Card in ExportList_Cards %}   
+            {% if Layout_Sizer|GetDictValue:'Part' == 'Focus' %}
+            <div id="{{Card.0.Nick}}" class="Card TopstoryItem DivUserListCard">
+                <div class="DivUserListImage">
+                    <img class="AvatarUserList" src="{{MEDIA_URL}}{{Card.0.Avatar}}" onclick="javascript:window.location.href='/UserProfile/Topic/{{Card.0.id}}/LE/1/'">
+                </div>
+                <div class="DivUserListDetail">
+                    <div>
+                        <button onclick="javascript:window.location.href='/UserProfile/Topic/{{Card.0.id}}/LE/1/'" class="BtnUserListNick NoDecoration"><b>{{Card.0.Nick}}</b></button>
+                    </div>
+                    <div class="DesLabelUserList">
+                        {{Card.0.Description}}
+                    </div>
+                    <div>
+                        <div class="LabelUserList">
+                            {{Card.0.TCount}}书评 ·
+                        </div>
+{#                        <div class="LabelUserList">#}
+{#                            {{Card.0.TRCount}}回答 ·#}
+{#                        </div>#}
+                        <div class="LabelUserList">
+                            {{Card.0.FansCount}}关注者
+                        </div>
+                    </div>
+                </div>
+                {% if Card.1|GetDictValue:'VisitorIdentity' == 'Others' %}
+                    <div class="DivUserListProfile">
+                    {% if Card.1|GetDictValue:'VisitorOAuth-Link' == 'Linked' %}
+                        <button id='LinkButton' class="Button Button--blue BtnCancelFocus" onclick="javascript:UserLink('/UserLink/','{{Card.0.id}}','delete')">取消关注</button>
+                    {% elif Card.1|GetDictValue:'VisitorOAuth-Link' == 'Link' %}
+                        <button id='LinkButton' class="Button Button--blue BtnCancelFocus" onclick="javascript:UserLink('/UserLink/','{{Card.0.id}}','add')">关注</button>
+                    {% endif %}                        
+                    </div>
+                {% endif %} 
+            </div>
+            {% elif Layout_Sizer|GetDictValue:'Part' == 'Fans' %}
+            <div id="{{Card.0.Nick}}" class="Card TopstoryItem DivUserListCard">
+                <div class="DivUserListImage">
+                    <img src="{{MEDIA_URL}}{{Card.0.Avatar}}" class="AvatarUserList" onclick="javascript:window.location.href='/UserProfile/Topic/{{Card.0.id}}/LE/1/'">
+                </div>
+                <div class="DivUserListDetail">
+                    <div>
+                        <button onclick="javascript:window.location.href='/UserProfile/Topic/{{Card.0.id}}/LE/1/'" class="BtnUserListNick NoDecoration"><b>{{Card.0.Nick}}</b></button>
+                    </div>
+                    <div class="DesLabelUserList">
+                        {{Card.0.Description}}
+                    </div>
+                    <div>
+                        <div class="LabelUserList">
+                            {{Card.0.TCount}}书评 ·
+                        </div>
+{#                        <div class="LabelUserList">#}
+{#                            {{Card.0.TRCount}}回答 ·#}
+{#                        </div>#}
+                        <div class="LabelUserList">
+                            {{Card.0.FansCount}}关注者
+                        </div>
+                    </div>
+                </div>
+                {% if Card.1|GetDictValue:'VisitorIdentity' == 'Others' %}
+                    <div class="DivUserListProfile">
+                    {% if Card.1|GetDictValue:'VisitorOAuth-Link' == 'Linked' %}
+                        <button id='LinkButton' class="Button Button--blue BtnCancelFocus" onclick="javascript:UserLink('/UserLink/','{{Card.0.id}}','delete')">取消关注</button>
+                    {% elif Card.1|GetDictValue:'VisitorOAuth-Link' == 'Link' %}
+                        <button id='LinkButton' class="Button Button--blue BtnCancelFocus" onclick="javascript:UserLink('/UserLink/','{{Card.0.id}}','add')">关注</button>
+                    {% endif %}                        
+                    </div>
+                {% endif %} 
+            </div>
+            {% elif Layout_Sizer|GetDictValue:'Part' == 'User' %}
+            <div id="{{Card.0.Nick}}" class="Card TopstoryItem">
+                <div class="DivUserListImage">
+                    <img src="{{MEDIA_URL}}{{Card.0.Avatar}}" class="AvatarUserList" onclick="javascript:window.location.href='/UserProfile/Topic/{{Card.0.id}}/LE/1/'">
+                </div>
+                <div class="DivUserListDetail">
+                    <div>
+                        <button onclick="javascript:window.location.href='/UserProfile/Topic/{{Card.0.id}}/LE/1/'" class="BtnUserListNick NoDecoration"><b>{{Card.0.Nick}}</b></button>
+                    </div>
+                    <div class="DesLabelUserList">
+                        {{Card.0.Description}}
+                    </div>
+                    <div>
+                        <div class="LabelUserList">
+                            {{Card.0.TCount}}书评 ·
+                        </div>
+{#                        <div class="LabelUserList">#}
+{#                            {{Card.0.TRCount}}回答 ·#}
+{#                        </div>#}
+                        <div class="LabelUserList">
+                            {{Card.0.FansCount}}关注者
+                        </div>
+                    </div>
+                </div>
+                {% if Card.1|GetDictValue:'VisitorIdentity' == 'Others' %}
+                    <div class="DivUserListSearch">
+                    {% if Card.1|GetDictValue:'VisitorOAuth-Link' == 'Linked' %}
+                        <button id='LinkButton' class="Button Button--blue BtnCancelFocus" onclick="javascript:UserLink('/UserLink/','{{Card.0.id}}','delete')">取消关注</button>
+                    {% elif Card.1|GetDictValue:'VisitorOAuth-Link' == 'Link' %}
+                        <button id='LinkButton' class="Button Button--blue BtnCancelFocus" onclick="javascript:UserLink('/UserLink/','{{Card.0.id}}','add')">关注</button>
+                    {% endif %}                        
+                    </div>
+                {% endif %} 
+            </div>   
+            {% endif %}
+        {% endfor %}
+        {% include "Paginator.html" %}
+    </div>                                                        
+</div>

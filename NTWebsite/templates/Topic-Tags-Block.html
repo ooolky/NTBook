@@ -1,0 +1,39 @@
+{% load CustomFuncTags %}
+<div class="FeedSource">
+    <div class="FeedSource-tagline">
+        <span class="ThemeTagSVG TagSVG">
+            <img src="{{MEDIA_URL}}SVG/TTB-DateTime.svg">
+        </span>
+        {% if Layout_Sizer|GetDictValue:'Region' == 'UserProfile' %}
+        <button class="ExponentTagItem TagSVG" onclick="javascript:window.location.href='/{{Card.0.Type}}/Time/{{ Card.0.CreateTime | date:'Y-m-d' }}/LE/1/'">{{Card.0.CreateTime}}</button> 
+        {% else %}
+        <button title='编辑时间' class="ExponentTagItem TagSVG" onclick="javascript:window.location.href='/{{Layout_Sizer|GetDictValue:'Region'}}/Time/{{ Card.0.EditTime | date:'Y-m-d' }}/LE/1/'">{{Card.0.EditTime}}</button>
+        {% endif %}
+        <span class="ThemeTagSVG">
+            <img src="{{MEDIA_URL}}SVG/TTB-Hot.svg">
+        </span>
+        <button class="ExponentTagItem TagSVG">{{Card.0.Hot}}</button> 
+        <span class="ThemeTagSVG">
+            <img src="{{MEDIA_URL}}SVG/TTB-Collect.svg">
+        </span>
+        <button class="ExponentTagItem TagSVG">{{Card.0.Collect}}</button> 
+{#        <span class="CategoryTagSVG">#}
+{#            <img src="{{MEDIA_URL}}SVG/TTB-Category.svg">#}
+{#        </span>#}
+{#        {% if Layout_Sizer|GetDictValue:'Region' == 'UserProfile' %}#}
+{#        <button class="TagItem NoDecoration" onclick="javascript:window.location.href='/{{Card.0.Type}}/Category/{{Card.0.Category.Name}}/LE/1/'">{{Card.0.Category.Name}}</button>#}
+{#        {% else %}#}
+{#        <button class="TagItem NoDecoration" onclick="javascript:window.location.href='/{{Layout_Sizer|GetDictValue:'Region'}}/Category/{{Card.0.Category.Name}}/LE/1/'">{{Card.0.Category.Name}}</button>#}
+{#        {% endif %}#}
+        <span class="ThemeTagSVG TagSVG">
+            <img src="{{MEDIA_URL}}SVG/TTB-Category.svg">
+        </span>
+        {% for theme in Card.0.Theme.all %}
+        {% if Layout_Sizer|GetDictValue:'Region' == 'UserProfile' %}
+        <button class="TagItem NoDecoration" onclick="javascript:window.location.href='/{{Card.0.Type}}/Theme/{{theme.Name}}/LE/1/'">{{theme.Name}}</button> 
+        {% else %}
+        <button class="TagItem NoDecoration" onclick="javascript:window.location.href='/{{Layout_Sizer|GetDictValue:'Region'}}/Theme/{{theme.Name}}/LE/1/'">{{theme.Name}}</button> 
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>

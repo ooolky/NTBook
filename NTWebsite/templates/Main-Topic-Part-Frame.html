@@ -1,0 +1,33 @@
+{% load CustomFuncTags %}
+{% if Layout_Sizer|GetDictValue:'Part' == 'Content' %}
+    <div class="Topstory-mainColumn ContentColumn">
+        <div class="Card AnswerCard" id='ArticleBody' articleid='{{ Card.0.ID }}'>
+            {% include "Main-Topic-Content-Frame.html" %}
+        </div>
+    </div>
+{% else %}
+    <div >
+        <div style="width: 965px">
+            {% include "Main-Topic-List-Frame.html" %}
+        </div>
+        {#        <div c lass="GlobalSideBar SideBarMargin SideBarPosition">#}
+        {#            <div class="Sticky">#}
+        {#                {% if not request.user.is_authenticated %}#}
+        {#                    <div class="Card">#}
+        {#                        <div class="GlobalSideBarLabel">#}
+        {#                            <div>#}
+        {#                                <b>用户功能</b>#}
+        {#                            </div>#}
+        {#                        </div>#}
+        {#                        {% include "List-UserFuncButton-Block.html" %}#}
+        {#                    </div>#}
+        {#                {% endif %}#}
+        {#                <div class="Card">#}
+        {#                    <div class="GlobalSideBarLabel">#}
+        {#                        <b>热门</b>#}
+        {#                    </div>#}
+        {#                </div>#}
+        {#            </div>#}
+        {#        </div>#}
+    </div>
+{% endif %}

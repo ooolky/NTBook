@@ -1,0 +1,51 @@
+{% load CustomFuncTags %}
+<div class="App-main user-main" style="margin-top: 65px">
+    <div class="ProfileHeader">
+        <div class="Card" style="height: 60px;line-height:60px">
+            <div style="display:inline-block;margin-left: 20px">
+                <div class="ContentItem-title" style="display: inline-block">
+                    {{ ExportItem_CategoryInfo.0.0.Name }}
+                </div>
+                <div style="display: inline-block; position: relative;width: 70px;">
+                    {{ ExportItem_CategoryInfo.0.0.SVG }}
+                </div>
+            </div>
+            <div style="display:inline-block;margin-left: 0px">
+                <div style="display: inline-block; position: relative;width: 70px;">
+                    <div class='star-after' style="color: #e2e2e2;width: 100%;">★★★★★
+                    </div>
+                    <div class='star-before' style="width: calc({{ ExportItem_CategoryInfo.0.0.Rating }}%*10);
+                            color:#f19e38;position: absolute;left:0;top:0;overflow: hidden;">★★★★★
+                    </div>
+                </div>
+                <div style="display: inline-block; position: relative;width: 70px;margin-left: 10px">
+                    评分：{{ ExportItem_CategoryInfo.0.0.Rating }}
+                </div>
+                <div style="display: inline-block; position: relative;width: 100px;margin-left: 10px">
+                    评分人数：{{ ExportItem_CategoryInfo.0.0.RatingNumber }}
+                </div>
+                {% ifequal Is_Published '0' %}
+                    <button id="Publish Topic" class="Button Button--blue BtnUserProfileSaveInfo" type="button"
+                            data-toggle="modal" data-target="#LongTextPublishBoard " style="margin-left: 200px">发表书评
+                    </button>
+                {% else %}
+                    <textarea hidden id="Hidden PublishedTopicID">{{ Is_Published }}</textarea>
+                    <button id="Change Topic" class="Button Button--blue BtnUserProfileSaveInfo" type="button"
+                            data-toggle="modal" data-target="#LongTextPublishBoard " style="margin-left: 185px"
+                            onclick="IsPublished()">修改书评
+                    </button>
+                {% endifequal %}
+            </div>
+        </div>
+        <div class="Card Topstory-noMarginCard Topstory-tabCard">
+            <ul role="tablist" class="Tabs">
+                <li role="tab" class="Tabs-item"
+                    style="text-decoration:none;font-size: 13px;font-weight:normal;
+            margin-top: 10px;margin-bottom: 10px;line-height: 22px">
+                    {{ ExportItem_CategoryInfo.0.0.Description }}
+                </li>
+            </ul>
+        </div>
+        {% include 'List-Topic-Frame.html' %}
+    </div>
+</div>

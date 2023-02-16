@@ -1,0 +1,34 @@
+{% load CustomFuncTags %}
+{% for Card in ExportList_Topic %}
+    <div id='ObjectContent' class="Comments-container" ObjectID='{{ Card.0.ObjectID }}'>
+        {% if Layout_Sizer|GetDictValue:'Region' == 'SpecialTopic' %}
+            <div style="width:100%;">
+                <img class="CoverPic" src="{{ Card.0.Cover_SR965x300.url }}">
+            </div>
+        {% endif %}
+        <div class="ContentItem AnswerItem" style="padding:20px 30px;">
+            <div>
+                <div style="height: 28px; line-height: 28px;margin-bottom: 10px">
+                <div class="ContentTitle" style="display: inline-block"><B>{{ Card.0.Category.Name }}</B></div>
+                <div class="shop-star" style="display: inline-block; position: relative;width: 70px;">
+                    <div class='star-after' style="color: #e2e2e2;width: 100%;">★★★★★</div>
+                    <div class='star-before' style="width: {{ Card.0.Rating }}%;color:#f19e38;position: absolute;left:0;top:0;overflow: hidden;">★★★★★</div>
+                </div>
+            </div>
+            {% include 'Topic-PublisherInfo-Block.html' %}
+            {% include 'Topic-Actions-Block.html' %}
+            {% include 'Topic-Tags-Block.html' %}
+            <div>
+                <hr class="ContentPageHr">
+            </div>
+            <div class="RichContent RichContent--unescapable">
+                <div class="RichContent RichContent--unescapable RichContent-inner Content" style="padding: unset">
+                    <span class="RichText ztext CopyrightRichText-richText">
+                        {{ Card.0.Content|safe }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endfor %}

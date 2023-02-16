@@ -1,0 +1,54 @@
+{% if not Paginator_num_pages == 0 %}
+<div id="anchorDiv" class="Comments-container">
+    {% for Card in ExportList_Cards %}
+    <div id="{{Card.2.0.ObjectID}}" class="CommentsV2 CommentsV2--withEditor CommentsV2-footer DivTopicCommit">
+        <div class="FeedSource">
+            {% include 'Comment-PublisherInfo-Block.html' %}
+            <div class="FeedSource-tagline">
+                <span class="ThemeTagSVG TagSVG">
+                    <img src="{{MEDIA_URL}}SVG/TTB-DateTime.svg">
+                </span>
+                <button class="ExponentTagItem TagSVG">{{Card.2.0.EditDate}}</button>         
+            </div>
+        </div>
+        <div class="ContentItem AnswerItem">
+            <div>
+                <hr class="ContentPageHr">
+            </div>
+            <div class="DivCommentOutline">{{Card.2.0.Content}}</div>
+            {% if Card.0 == '1' %}
+            <div class="CommentsV2 CommentsV2--withEditor CommentsV2-withPagination CommentsV2-footer DivCommentInline">
+                <div class="FeedSource-firstline">
+                    <button class="TagItem">回复</button> 
+                    <img class="AvatarBase" src="{{MEDIA_URL}}{{Card.1.Publisher.Avatar}}">
+                    <button title="{{Card.1.Publisher.id}}" class="Button Button--plain NoDecoration NickComment" onclick="javascript:window.location.href='/UserProfile/Topic/{{Card.1.Publisher.id}}/LE/1/'"><b>{{Card.1.Publisher.Nick}}</b></a>
+                    <span class="UserDesDot"><b>·</b></span>
+                    <span class="UserDesComment">{{Card.1.Publisher.Description}}</span>
+                </div>
+                <div class="FeedSource-firstline">
+                    <span class="ThemeTagSVG TagSVG">
+                        <img src="{{MEDIA_URL}}SVG/TTB-DateTime.svg">
+                    </span>
+                    <button class="ExponentTagItem TagSVG">{{Card.1.EditDate}}</button>
+                <div>
+                    <hr class="ContentPageHr">
+                </div>
+                </div>
+                <div class="ContentItem">
+                    <div class="DivInline">
+                        <img src="{{MEDIA_URL}}SVG/RDB-QmarkL.svg">
+                    </div>
+                    <h3 class="CommentReplayFont DivInline">{{Card.1.Content}}</h3>
+                    <div class="DivInline">
+                        <img src="{{MEDIA_URL}}SVG/RDB-QmarkR.svg">
+                    </div>                           
+                </div>     
+            </div>
+            {% endif %}
+            {% include 'Comment-Actions-Block.html' %}
+        </div>
+    </div>
+    {% endfor %}
+    {% include "Paginator.html" %}
+</div> 
+{% endif %}

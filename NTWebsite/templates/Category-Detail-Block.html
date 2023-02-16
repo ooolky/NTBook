@@ -1,0 +1,15 @@
+{% load CustomFuncTags %}
+<div class="ContentItem ArticleItem">
+    <div style="font-weight: bolder">
+        <div class="ContentItem-title" style="display: inline-block; "
+             onclick="javascript:window.location.href='/Category/Content/{{ Card.0.id }}/LE/1/'">
+            {{ Card.0.Name }}
+        </div>
+        <div style="display: inline-block; position: relative;width: 70px;">
+            {{ Card.0.SVG }}
+        </div>
+        <div style="font-size: 13px;font-weight:normal;line-height: 22px;margin-top: 5px">
+           简介： {{ Card.0.Description }}
+        </div>
+    </div>
+</div>

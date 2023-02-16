@@ -1,0 +1,112 @@
+{% load CustomFuncTags %}
+<div>
+    <div class="ContentItem-actions">
+        <span>
+            {% if Layout_Sizer|GetDictValue:'Region' == 'UserProfile' %}
+            <button {{Card.1|GetDictValue:'TVoteBtn'}} id="Button1#{{Card.0.ObjectID}}" class="Button VoteButton VoteButton--up {{Card.1|GetDictValue:'TVote1Status'}}" onclick="AttitudeOperate('{{Card.0.Type}}','{{Card.0.ObjectID}}','1')">
+            {% else %}
+            <button {{Card.1|GetDictValue:'TVoteBtn'}} id="Button1#{{Card.0.ObjectID}}" class="Button VoteButton VoteButton--up {{Card.1|GetDictValue:'TVote1Status'}}" onclick="AttitudeOperate('{{Layout_Sizer|GetDictValue:'Region'}}','{{Card.0.ObjectID}}','1')">
+            {% endif %}
+                <span class="AttitudeActions">          
+                    <img src="{{MEDIA_URL}}SVG/TAB-Like.svg">
+                </span>
+                <span id='Span1#{{Card.0.ObjectID}}'>{{Card.0.Like}}</span>
+            </button>
+            {% if Layout_Sizer|GetDictValue:'Region' == 'UserProfile' %}
+            <button {{Card.1|GetDictValue:'TVoteBtn'}} id="Button0#{{Card.0.ObjectID}}" class="Button VoteButton VoteButton--up {{Card.1|GetDictValue:'TVote0Status'}}" onclick="AttitudeOperate('{{Card.0.Type}}','{{Card.0.ObjectID}}','0')">
+            {% else %}
+            <button {{Card.1|GetDictValue:'TVoteBtn'}} id="Button0#{{Card.0.ObjectID}}" class="Button VoteButton VoteButton--up {{Card.1|GetDictValue:'TVote0Status'}}" onclick="AttitudeOperate('{{Layout_Sizer|GetDictValue:'Region'}}','{{Card.0.ObjectID}}','0')">
+            {% endif %} 
+                <span class="AttitudeActions">
+                    <img src="{{MEDIA_URL}}SVG/TAB-Dislike.svg">
+                </span>
+                <span id='Span0#{{Card.0.ObjectID}}'>{{Card.0.Dislike}}</span>
+            </button>
+        </span>
+        <span {{Card.1|GetDictValue:'TVoteBtn'}} class="ContentItem-action Button--plain Button--withIcon Button--withLabel">
+            {% if Layout_Sizer|GetDictValue:'Region' == 'UserProfile' %}
+            <button class="ActionsFontColor NoDecoration TopicActions" type="button" onclick="javascript:window.location.href='/{{Card.0.Type}}/Content/{{Card.0.ObjectID}}/LE/1#anchorDiv/'">
+            {% elif Layout_Sizer|GetDictValue:'Region' == 'Search' %}
+            <button class="ActionsFontColor NoDecoration TopicActions" type="button" onclick="javascript:window.location.href='/{{Card.0.Type}}/Content/{{Card.0.ObjectID}}/LE/1#anchorDiv/'">            
+            {% else %}
+            <button class="ActionsFontColor NoDecoration TopicActions" type="button" onclick="javascript:window.location.href='/{{Layout_Sizer|GetDictValue:'Region'}}/Content/{{Card.0.ObjectID}}/LE/1#anchorDiv'">
+            {% endif %}            
+                <span>
+                    <img src="{{MEDIA_URL}}SVG/TAB-Comment.svg">
+                </span>
+                {{Card.0.Comment}} 条评论
+            </button>    
+        </span>
+{#        <span class="ContentItem-action Button--plain Button--withIcon Button--withLabel">#}
+{#            {% if Layout_Sizer|GetDictValue:'Region' == 'UserProfile' %}#}
+{#            <button class="ActionsFontColor NoDecoration TopicActions" onclick="javascript:QRcodeShare('/{{Card.0.Type}}/Content/{{Card.0.ObjectID}}/LE/1/Share')" data-toggle="modal" data-target="#QRcodeBoard">#}
+{#            {% elif Layout_Sizer|GetDictValue:'Region' == 'Search' %}#}
+{#            <button class="ActionsFontColor NoDecoration TopicActions" onclick="javascript:QRcodeShare('/{{Card.0.Type}}/Content/{{Card.0.ObjectID}}/LE/1/Share')" data-toggle="modal" data-target="#QRcodeBoard">#}
+{#            {% else %}#}
+{#            <button class="ActionsFontColor NoDecoration TopicActions" onclick="javascript:QRcodeShare('/{{Layout_Sizer|GetDictValue:'Region'}}/Content/{{Card.0.ObjectID}}/LE/1/Share')" data-toggle="modal" data-target="#QRcodeBoard">#}
+{#            {% endif %}#}
+{#                <span class="TopicActions">#}
+{#                    <img src="{{MEDIA_URL}}SVG/TAB-Share.svg">#}
+{#                </span>#}
+{#                分享#}
+{#            </button>    #}
+{#        </span>#}
+{#        <span {{Card.1|GetDictValue:'TipOffBtn'}} class="ContentItem-action Button--plain Button--withIcon Button--withLabel">#}
+{#            {% if Layout_Sizer|GetDictValue:'Region' == 'UserProfile' %}#}
+{#            <button class="ActionsFontColor NoDecoration TopicActions" onclick="javascript:OpenTipOffView('{{Card.0.ObjectID}}','{{Card.0.Type}}')" data-toggle="modal" data-target="#TipOffBoard">#}
+{#            {% else %}#}
+{#            <button class="ActionsFontColor NoDecoration TopicActions" onclick="javascript:OpenTipOffView('{{Card.0.ObjectID}}','{{Layout_Sizer|GetDictValue:'Region'}}')" data-toggle="modal" data-target="#TipOffBoard">#}
+{#            {% endif %}            #}
+{#                <span class="TopicActions">#}
+{#                    <img src="{{MEDIA_URL}}SVG/TAB-Tipoff.svg">#}
+{#                </span>#}
+{#                {{Card.1|GetDictValue:'TipOffStatus'}}#}
+{#            </button> #}
+{#        </span>#}
+{#        <span {{Card.1|GetDictValue:'DonateBtn'}} class="ContentItem-action Button--plain Button--withIcon Button--withLabel">#}
+{#            {% if Layout_Sizer|GetDictValue:'Region' == 'UserProfile' %}#}
+{#            <button class="ActionsFontColor NoDecoration TopicActions" onclick="javascript:alert('功能未开放！')">#}
+{#            {% else %}#}
+{#            <button class="ActionsFontColor NoDecoration TopicActions" onclick="javascript:alert('功能未开放！')">#}
+{#            {% endif %}#}
+{#                <span class="TopicActions">#}
+{#                    <img src="{{MEDIA_URL}}SVG/TAB-Donate.svg">#}
+{#                </span>#}
+{#                打赏#}
+{#            </button>    #}
+{#        </span>#}
+        {% if Card.0.Type == 'Topic' %}
+            {% if not Card.1|GetDictValue:'CollectBtn' == 'hidden' %}
+            <span class="ContentItem-action Button--plain Button--withIcon Button--withLabel">
+                <button class="ActionsFontColor NoDecoration TopicActions" onclick="javascript:Collect('{{Card.0.ObjectID}}','Collect')">
+                    <span class="TopicActions">
+                        <img src="{{MEDIA_URL}}SVG/TAB-Collect.svg">
+                    </span>
+                    {{Card.1|GetDictValue:'CollectStatus'}}
+                </button>
+            </span>
+            {% endif %}
+        {% elif Card.0.Type == 'SpecialTopic' %}
+            {% if not Card.1|GetDictValue:'ConcernBtn' == 'hidden' %}
+            <span class="ContentItem-action Button--plain Button--withIcon Button--withLabel">
+                <button class="ActionsFontColor NoDecoration TopicActions" onclick="javascript:Collect('{{Card.0.ObjectID}}','Concern')">
+                    <span class="TopicActions">
+                        <img src="{{MEDIA_URL}}SVG/TAB-Collect.svg">
+                    </span>
+                    {{Card.1|GetDictValue:'ConcernStatus'}}
+                </button>
+            </span>
+            {% endif %}
+        {% endif %}
+        {% if not Card.1|GetDictValue:'EditBtn' == 'hidden' %}
+        <span {{Card.1|GetDictValue:'EditBtn'}} class="ContentItem-action Button--plain Button--withIcon Button--withLabel">
+            <button class="ActionsFontColor NoDecoration TopicActions" onclick="javascript:GetTopic('{{Card.0.ObjectID}}')" data-toggle="modal" data-target="#LongTextPublishBoard">
+                <span class="TopicActions">
+                    <img src="{{MEDIA_URL}}SVG/TAB-Edit.svg">
+                </span>
+                编辑
+            </button>    
+        </span>
+        {% endif %}
+    </div>
+</div>

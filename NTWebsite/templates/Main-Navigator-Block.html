@@ -1,0 +1,74 @@
+{% load CustomFuncTags %}
+{% load static %}
+<div class="stickUpHeader">
+    <header class="Sticky AppHeader" data-za-modeule='TopNavBar'>
+        <div class="AppHeader-inner">
+            <a href="/" aria-label="NT">
+                <img src="{{ MEDIA_URL }}Logo.png" class="ImageLogo" onclick="javascript:window.location.href='www.nagetive.com'">
+            </a>
+{#            <nav class="AppHeader-nav">#}
+{#                <button class="AppHeader-navItem NoDecoration {{Main_URL_Sizer.0}}" onclick="javascript:window.location.href='/Topic/List/0/RC/1/'">观球不语</button>#}
+{#                <button class="AppHeader-navItem NoDecoration {{Main_URL_Sizer.1}}" onclick="javascript:window.location.href='/RollCall/List/0/RC/1/'">素质广场</button>#}
+{#                <button class="AppHeader-navItem NoDecoration {{Main_URL_Sizer.2}}" onclick="javascript:window.location.href='/SpecialTopic/List/0/RC/1/'">名堂专题</button>#}
+{#            </nav>#}
+            <div class="SearchBar">
+                <div class="SearchBar-toolWrapper">
+                    <form class="SearchBar-tool">
+                        <div class="Poppover">
+                            <div class="SearchBar-input Input-wrapper Input-wrapper--grey" style="margin-left:250px;width:410px">
+                                <input class="SearchBarInput" type="text">
+                                <input id='SearchInput' type="text" placeholder='{{Search_Placeholder}}' maxlength="100" class="Input" onkeydown="if(event.keyCode==13){Search('{{Search_Placeholder}}');}">
+                                <div class="Input-after">
+                                    <select id="SearchSelect" class="SelectNavigator" style="font-size: 14px">
+                                        <option title="Category" selected="selected" >书籍</option>
+                                        <option title="Topic" >书评</option>
+{#                                        <option title="Theme" >标签</option>#}
+                                        <option title="User" >用户</option>
+                                    </select>                                            
+                                    <button id="SearchButton" aria-label="搜索" type="button" class="Button--primary" onclick="javascript:Search('{{Search_Placeholder}}')">
+                                        <img src="{{MEDIA_URL}}SVG/MNB-Search.svg" >
+                                    </button> 
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="AppHeader-userInfo">
+{#                <button title="开源主页" type="button" class="Button Button--plain BtnNavMargin" onclick="javascript:window.open('https://github.com/flysafely/Python-Diary/blob/master/main.md','Flysafely GitHub','menubar=0,scrollbars=1, resizable=1,status=1,titlebar=0,toolbar=0,location=1')">#}
+{#                    <img src="{{MEDIA_URL}}SVG/MNB-GitHub.svg" >#}
+{#                </button>#}
+{#                {% if request.user.is_authenticated %}#}
+                    {#增加发表书评按钮#}
+{#                <button title="发表书评" class="GlobalWrite-navItem NoDecoration" type="button" data-toggle="modal" data-target="#LongTextPublishBoard" style="background-color: #0077e6; border-radius: 999px; width: 80px">#}
+{#                <div class="GlobalWrite-navTitle" style="font-size: 14px; color: white; padding-top: 1px; line-height: 35px;font-weight: bold">发表书评</div>#}
+{#                </button>#}
+{#                <button title="通知栏" type="button" class="Button Button--plain BtnNavMargin" data-toggle='modal' data-target="#NotificationBar" onclick="javascript:GetNotificationInfo()">#}
+{#                {% else %}#}
+{#                <button title="通知栏" type="button" class="Button Button--plain BtnNavMargin" onclick="javascript:GetNotificationInfo()">#}
+{#                {% endif %}#}
+{#                    <img src="{{MEDIA_URL}}SVG/MNB-Notification.svg" >#}
+{#                    {% ifnotequal NotificationCount '0' %}#}
+{#                    <span id="NotificationCount" class="NotificationCounter NotificationMargin" style="top:28px;right:117px">{{NotificationCount}}</span>#}
+{#                    {% endifnotequal %}#}
+{#                </button>#}
+{#                <button title="消息栏" type="button" class="Button Button--plain BtnNavMargin" data-toggle='modal' data-target="#BulletinBoard">#}
+{#                    <img src="{{MEDIA_URL}}SVG/MNB-Message.svg">#}
+{#                    <!--<span class="NotificationCounter"></span>-->#}
+{#                </button>#}
+                {% if request.user.is_authenticated %}
+                <button title="{{request.user.Nick}}" type="button" class="Button Button--plain BtnNavMargin" onclick="javascript:window.location.href='/UserProfile/Topic/{{request.user.id}}/LE/1/'">
+                    <img src="{{ MEDIA_URL }}{{request.user.Avatar}}" class="AvatarBase">
+                </button>
+                <button title="注销" id='logoutbutton' type="button" class="Button Button--plain BtnNavMargin" onclick="javascript:Logout('/logout/');">
+                    <img src="{{MEDIA_URL}}SVG/MNB-Logout.svg">
+                </button> 
+                {% else %}
+                <button title="登录NT" id='loginbutton' type="button" class="Button Button--plain BtnNavMargin" data-toggle='modal' data-target="#LoginBoard" onclick="document.getElementById('LoginVfCodeInput').click();">
+                    <img src="{{MEDIA_URL}}SVG/MNB-Login.svg">
+                </button>               
+                {% endif %}               
+            </div>
+        </div>      
+    </header>
+</div>
